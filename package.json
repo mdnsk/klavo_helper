@@ -1,0 +1,28 @@
+{
+  "name": "klavo-helper",
+  "version": "0.0.1",
+  "description": "Improves klavogonki.ru",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --progress --hide-modules --mode=production",
+    "dev": "webpack --watch --progress --hide-modules --mode=development",
+    "web-ext:run": "web-ext run --source-dir ./extension/",
+    "web-ext:run-chromium": "web-ext run --target chromium --source-dir ./extension/",
+    "web-ext:build": "web-ext build --source-dir ./extension/ --artifactsDir ./releases --overwrite-dest",
+    "web-ext:lint": "web-ext lint --source-dir ./extension/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mikhail Donskoy <m.donsk@yandex.ru>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-loader": "^8.0.6",
+    "web-ext": "^4.1.0",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "debounce": "^1.2.0"
+  }
+}
