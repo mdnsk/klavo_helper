@@ -1,6 +1,6 @@
 import debounce from 'debounce';
 
-import { UNREAD_MESSAGES_COUNTER_CHANGED } from './messages';
+import { START_FLICKR_TITLE, STOP_FLICKR_TITLE, UNREAD_MESSAGES_COUNTER_CHANGED } from './messages';
 
 const DEBOUNCE_THRESHOLD = 1000;
 
@@ -18,6 +18,27 @@ chrome.runtime.onMessage.addListener(({ id: messageId, data }, { tab: { id: tabI
 
     if (currentCount > previousCount) {
       playSound();
+      flickrTitle();
     }
   }
+});
+
+async function flickrTitle() {
+  chrome.tabs.query({ url: '*://klavogonki.ru/*' }, tabs => {
+    if (tabs.length) {
+      let tab = tabs.find(t => /messages\/contacts\/$/.test(t.url));
+  
+      if (!tab) {
+        tab = tabs[0];
+      }
+  
+      if (!tab.active) {
+        chrome.tabs.sendMessage(tab.id, { id: START_FLICKR_TITLE });
+      }
+    }
+  });
+}
+
+chrome.tabs.onActivated.addListener(activeInfo => {
+  chrome.tabs.sendMessage(activeInfo.tabId, { id: STOP_FLICKR_TITLE });
 });

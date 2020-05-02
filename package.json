@@ -1,6 +1,6 @@
 {
   "name": "klavo-helper",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Improves klavogonki.ru",
   "main": "index.js",
   "scripts": {
